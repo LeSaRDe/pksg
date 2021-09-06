@@ -1,2 +1,2 @@
-# pksg
-This is the PKSG project.
+# PKSG
+This is the PKSG project. 
