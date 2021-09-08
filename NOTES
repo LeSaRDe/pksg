@@ -1,0 +1,8 @@
+For pipeline automation:
+
+TODO
+1. Define a global env variable for the working folder.
+2. Change the hard-coded working folder path in "sentiment_analysis_and_forecasting/scenario_settings.py"
+3. Change the hard-coded working folder path in "global_settings.py"
+4. Change the hard-coded working folder path in "core_nlp_sentiments/src/GlobalSettings.java"
+5. Make dir for "bin" under "core_nlp_sentiments"
