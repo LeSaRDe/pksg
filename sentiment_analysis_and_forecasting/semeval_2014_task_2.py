@@ -278,33 +278,40 @@ def semeval2014task2_pksg(ds_name):
     logging.debug('[semeval2014task2_pksg] All done in %s secs.' % str(time.time() - timer_start))
 
 
+def get_dom_sent_cat(sent_vec):
+    simplified_sent_vec = np.asarray([sent_vec[0] + sent_vec[1], sent_vec[2], sent_vec[3] + sent_vec[4]])
+    sent_cat = np.argmax(simplified_sent_vec)
+    return sent_cat
+
+
 def aggregate_node_sentiments(node_label, pksg, df_ph_id_to_ph_str):
     if node_label not in pksg:
         raise Exception('[aggregate_node_sentiments] Node %s is not in PKSG.' % str(node_label))
 
-    d_sent_cat_cnt = {i: [0, []] for i in range(5)}
+    d_sent_cat_cnt = {i: [0, []] for i in range(3)}
     for neig in pksg.neighbors(node_label):
         neig_str = df_ph_id_to_ph_str.loc[neig][global_settings.g_ph_str_col]
         edge = pksg.edges[(node_label, neig)]
         l_sent = edge['sent']
         for sent_vec in l_sent:
-            sent_cat = np.argmax(np.asarray(sent_vec))
+            # sent_cat = np.argmax(np.asarray(sent_vec))
+            sent_cat = get_dom_sent_cat(sent_vec)
             d_sent_cat_cnt[sent_cat][0] += 1
             d_sent_cat_cnt[sent_cat][1].append(neig_str)
 
-    d_ret = {'negative': d_sent_cat_cnt[0][1] + d_sent_cat_cnt[1][1],
-             'positive': d_sent_cat_cnt[3][1] + d_sent_cat_cnt[4][1],
-             'conflict': d_sent_cat_cnt[0][1] + d_sent_cat_cnt[1][1] + d_sent_cat_cnt[3][1] + d_sent_cat_cnt[4][1],
-             'neutral': d_sent_cat_cnt[2][1]}
+    d_ret = {'negative': d_sent_cat_cnt[0][1],
+             'positive': d_sent_cat_cnt[2][1],
+             'conflict': d_sent_cat_cnt[0][1] + d_sent_cat_cnt[2][1],
+             'neutral': d_sent_cat_cnt[1][1]}
     l_ret = []
-    if np.sum([d_sent_cat_cnt[i][0] for i in range(5)]) > 0:
-        dom_sent_cnt = np.max([d_sent_cat_cnt[i][0] for i in range(5)])
-        l_dom_sent_cat = [i for i, cnt in enumerate([d_sent_cat_cnt[i][0] for i in range(5)]) if cnt == dom_sent_cnt]
+    if np.sum([d_sent_cat_cnt[i][0] for i in range(3)]) > 0:
+        dom_sent_cnt = np.max([d_sent_cat_cnt[i][0] for i in range(3)])
+        l_dom_sent_cat = [i for i, cnt in enumerate([d_sent_cat_cnt[i][0] for i in range(3)]) if cnt == dom_sent_cnt]
         # dom_sent_cat = np.argmax([d_sent_cat_cnt[i][0] for i in range(5)])
         for dom_sent_cat in l_dom_sent_cat:
-            if dom_sent_cat == 0 or dom_sent_cat == 1:
+            if dom_sent_cat == 0:
                 l_ret.append('negative')
-            elif dom_sent_cat == 3 or dom_sent_cat == 4:
+            elif dom_sent_cat == 2:
                 l_ret.append('positive')
             else:
                 l_ret.append('neutral')
@@ -367,8 +374,8 @@ def semeval2014task2_term_sent(ds_name):
             # term_str = ' '.join(sorted([token.lower() for token in term.split(' ')]))
             term_str = term.lower()
             term_ph_id = df_ph_str_to_ph_id.loc[term_str][global_settings.g_ph_id_col]
-            # l_ret, d_ret = aggregate_node_sentiments(term_ph_id, pksg, df_ph_id_to_ph_str)
-            l_ret, d_ret = aggregate_ph_sentiments(term, l_ph_sent)
+            l_ret, d_ret = aggregate_node_sentiments(term_ph_id, pksg, df_ph_id_to_ph_str)
+            # l_ret, d_ret = aggregate_ph_sentiments(term, l_ph_sent)
             confusion = False
             if len(l_ret) > 1:
                 confusion = True
@@ -388,13 +395,13 @@ def semeval2014task2_term_sent(ds_name):
     df_rec = pd.DataFrame(l_ret_rec, columns=['term_id', 'sent_match', 'confusion', 'potential', 'sent', 'evidence',
                                               'truth', 'raw_txt', 'd_ret'])
     df_rec = df_rec.set_index('term_id')
-    pd.to_pickle(df_rec, global_settings.g_work_folder + 'ret.pickle')
+    pd.to_pickle(df_rec, global_settings.g_work_folder + 'ret_' + ds_name + '.pickle')
     logging.debug('[semeval2014task2_term_sent] All done.')
 
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    ds_idx = 0
+    ds_idx = 1
     ds_name = 'restaurants'
 
     # semeval2014task2_raw_txt_info(ds_idx, ds_name)
@@ -403,6 +410,6 @@ if __name__ == '__main__':
     # semeval2014task2_stanford_sentiments_preparation(ds_name)
     # semeval2014task2_txt_ph(ds_name)
     # semeval2014task2_sgraph(ds_name)
-    # semeval2014task2_ph_sent(ds_name)
+    semeval2014task2_ph_sent(ds_name)
     # semeval2014task2_pksg(ds_name)
-    semeval2014task2_term_sent(ds_name)
+    # semeval2014task2_term_sent(ds_name)

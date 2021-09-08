@@ -15,15 +15,16 @@ if g_local_or_remote == 'remote':
     g_conf_folder = g_work_folder + 'conf/'
 else:
     # LOCAL
-    # g_work_folder = '/home/mf3jh/workspace/data/covid/'
-    g_work_folder = '/home/mf3jh/workspace/data/aspect_sentiment_analysis/'
+    g_work_folder = '/home/mf3jh/workspace/data/covid/'
+    # g_work_folder = '/home/mf3jh/workspace/data/aspect_sentiment_analysis/'
     # g_raw_data_folder = g_work_folder + 'tw_raw_data/carley/'
     # g_raw_data_folder = g_work_folder + 'tw_raw_data/2021_covid_geo_tweets/'
     # g_raw_data_folder = g_work_folder + 'tw_raw_data/202001_sample/'
     # g_raw_data_folder = g_work_folder + 'tw_raw_data/202005/'
     # g_raw_data_folder = g_work_folder + 'tw_raw_data/pure_test/'
     # g_raw_data_folder = g_work_folder + 'tw_raw_data/va_vax2021_jan_may/'
-    g_raw_data_folder = g_work_folder + 'raw_data/'
+    g_raw_data_folder = g_work_folder + 'tw_raw_data/sample/'
+    # g_raw_data_folder = g_work_folder + 'raw_data/'
     g_conf_folder = g_work_folder + 'conf/'
 
 """

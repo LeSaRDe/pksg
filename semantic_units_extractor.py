@@ -20,6 +20,7 @@ import pandas as pd
 
 import global_settings
 import sd_2_usd
+from stopwords import STOP_WORDS
 
 
 def prelim_txt_clean(raw_text, extra_clean_func=None, extra_clean_func_params=None):
@@ -99,6 +100,7 @@ class SemUnitsExtractor:
             in_fd.close()
         try:
             self.m_conf_spacy_model_name = d_conf['spacy_model']
+            self.m_use_custom_stopwords = d_conf['use_custom_stopwords']
             self.m_conf_stopwords_path = d_conf['stopwords_path']
             self.m_conf_spacy_coref_greedyness = float(d_conf['spacy_coref_greedyness'])
             self.m_s_ner_tags = set(d_conf['ner'])
@@ -124,6 +126,8 @@ class SemUnitsExtractor:
         return spacy_model
 
     def load_stopwords(self, stopwords_path):
+        if self.m_use_custom_stopwords:
+            return None
         if not path.exists(stopwords_path):
             raise Exception('[SemUnitsExtractor:__init__] No stopwords file!')
         s_stopwords = set([])
@@ -136,7 +140,6 @@ class SemUnitsExtractor:
             in_fd.close()
         return s_stopwords
 
-
     def is_trivial_dep(self, token_dep):
         if self.m_b_en_dep_filter:
             if token_dep in self.m_s_core_deps:
@@ -146,6 +149,17 @@ class SemUnitsExtractor:
         else:
             return False
 
+    def is_stopword(self, token):
+        if not self.m_use_custom_stopwords:
+            if token in self.m_spacy_model_ins.Defaults.stop_words:
+                return True
+            else:
+                return False
+        else:
+            if token in self.m_s_stopwords:
+                return True
+            else:
+                return False
 
     def is_trivial_token(self, spacy_token, cleaned_lemma=None):
         '''
@@ -173,10 +187,10 @@ class SemUnitsExtractor:
         if clean_token == '':  # or not clean_token.isascii():
             return True
         if self.m_b_keep_neg:
-            if (spacy_token.is_stop or clean_token.lower() in self.m_s_stopwords) and spacy_token.dep_ != 'neg':
+            if self.is_stopword(clean_token.lower()) and spacy_token.dep_ != 'neg':
                 return True
         else:
-            if (spacy_token.is_stop or clean_token.lower() in self.m_s_stopwords):
+            if self.is_stopword(clean_token.lower()):
                 return True
         return False
 

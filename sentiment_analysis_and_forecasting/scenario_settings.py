@@ -25,8 +25,10 @@ import global_settings
 
 # g_raw_ds_names = ['my_test.txt']
 
-g_raw_ds_names = ['Restaurants_Train_v2.xml',
-                  'Laptop_Train_v2.xml']
+# g_raw_ds_names = ['Restaurants_Train_v2.xml',
+#                   'Laptop_Train_v2.xml']
+
+g_raw_ds_names = ['sample.txt']
 
 
 # Used by SEM_UNIT

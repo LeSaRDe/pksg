@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+core_nlp_sentiments/.gradle/
+core_nlp_sentiments/.idea/
+core_nlp_sentiments/bin/
+
+
