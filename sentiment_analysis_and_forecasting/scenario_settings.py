@@ -1,7 +1,7 @@
 import sys
-g_pksg_module_folder = '/home/mf3jh/workspace/pksg/'
+from global_settings import g_src_folder, g_conf_folder
+g_pksg_module_folder = g_src_folder
 sys.path.insert(1, g_pksg_module_folder)
-import global_settings
 
 
 # g_raw_ds_names = {'ca': 'CA_Mask_Twt_Text_Meta.csv',
@@ -32,7 +32,7 @@ g_raw_ds_names = ['sample.txt']
 
 
 # Used by SEM_UNIT
-g_cust_ph_file_fmt = global_settings.g_conf_folder + 'cust_ph_{0}.txt'
+g_cust_ph_file_fmt = g_conf_folder + 'cust_ph_{0}.txt'
 
 # Used by SENT_TS
-g_query_file_fmt = global_settings.g_conf_folder + 'query_{0}.txt'
+g_query_file_fmt = g_conf_folder + 'query_{0}.txt'
