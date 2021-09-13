@@ -17,6 +17,12 @@ pipeline {
             echo "WORKSPACE ${WORKSPACE}"
             echo "OUTPUT ${OUTPUT}"
             sh 'cd $WORKSPACE'
+            echo "Create venv"
+            sh 'python3 -m venv venv'
+            echo "Activate venv"
+            sh '. venv/bin/activate'
+            echo "Install package"
+            sh 'pip install -e .'
         	sh 'chmod +x ./run_scripts/pksg_pipeline_envsetup.sh && ./run_scripts/pksg_pipeline_envsetup.sh'
           }
 
