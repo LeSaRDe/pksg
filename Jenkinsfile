@@ -16,7 +16,8 @@ pipeline {
           steps {
             echo "WORKSPACE ${WORKSPACE}"
             echo "OUTPUT ${OUTPUT}"
-        	sh 'chmod +x $WORKSPACE/run_scripts/pksg_pipeline_envsetup.sh && $WORKSPACE/run_script/pksg_pipeline_envsetup.sh'
+            sh 'cd $WORKSPACE'
+        	sh 'chmod +x ./run_scripts/pksg_pipeline_envsetup.sh && ./run_scripts/pksg_pipeline_envsetup.sh'
           }
 
         }
@@ -28,7 +29,6 @@ pipeline {
             }
             steps {
                 echo "RAW_TXT Starts."
-                sh 'cd $WORKSPACE'
                 sh 'python3 ./sentiment_analysis_and_forecasting/snt_ana_frcst_raw_tw_info_$DS_NAME.py gen_tasks $RAW_TXT_INFO_NUM_TASK $RAW_TXT_INFO_JOB_ID'
                 sh 'python3 ./sentiment_analysis_and_forecasting/snt_ana_frcst_raw_tw_info_$DS_NAME.py raw_tw_info $RAW_TXT_INFO_NUM_TASK $RAW_TXT_INFO_JOB_ID $DS_NAME'
                 echo "RAW_TXT is done!"
