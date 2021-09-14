@@ -3,6 +3,13 @@
 ##################################################
 # ENVIRONMENT VARIABLES
 ##################################################
+# DIR
+WORKSPACE=D:\workspace\PKSG\pksg
+export WORKSPACE
+
+OUTPUT=D:\workspace\PKSG\output
+export OUTPUT
+
 # GLOBAL
 DS_NAME="sample"
 export DS_NAME

@@ -6,12 +6,12 @@ import sys
 import time
 from os import walk
 
-import networkx as nx
 import pandas as pd
 import numpy as np
 from sklearn import preprocessing
 
 import global_settings as global_settings
+
 sys.path.insert(1, global_settings.g_lexvec_model_folder)
 import model as lexvec
 

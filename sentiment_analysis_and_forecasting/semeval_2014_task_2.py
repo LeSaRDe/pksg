@@ -7,13 +7,10 @@ import xml.etree.ElementTree as ET
 import numpy as np
 from gensim.parsing import preprocessing
 
-import scenario_settings
 import global_settings
 
 from txt_cleansing import txt_clean_single_task
-from txt_hash import txt_hash_single_task, txt_hash_after_merge
-from semantic_units_extraction import sem_unit_ext_single_task
-from semantic_units_extractor import SemUnitsExtractor, word_clean
+from semantic_units_extractor import SemUnitsExtractor
 from phrase_extraction import phrase_ext_single_task, map_between_txt_and_phrase
 from sentiment_graphs import build_sgraph_from_json_single_task
 from phrase_sentiment import phrase_sent_single_task

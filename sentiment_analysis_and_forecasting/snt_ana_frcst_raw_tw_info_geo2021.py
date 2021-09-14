@@ -7,8 +7,7 @@ import math
 import sys
 import pandas as pd
 
-import scenario_settings
-import global_settings
+from lib import global_settings
 from multitasking import multitasking
 
 

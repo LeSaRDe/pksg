@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import scenario_settings
-import global_settings
+from lib import global_settings
 from multitasking import multitasking
 
 

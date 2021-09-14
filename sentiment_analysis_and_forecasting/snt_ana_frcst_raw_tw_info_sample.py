@@ -8,8 +8,8 @@ import sys
 import pandas as pd
 
 # import scenario_settings
-from .. import global_settings
-from multitasking import multitasking
+from lib import global_settings
+from lib.multitasking import multitasking
 
 
 """

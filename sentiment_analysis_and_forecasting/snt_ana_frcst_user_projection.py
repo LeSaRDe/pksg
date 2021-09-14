@@ -2,17 +2,10 @@ import logging
 import math
 import sys
 import time
-from os import path, walk
-import re
 
-import networkx as nx
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
-import scenario_settings
-import global_settings
-from multitasking import multitasking
+from lib import global_settings
 
 
 def gen_rtug_ts_tasks(num_task, job_id, t_int_ds_name):

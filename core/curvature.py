@@ -1,17 +1,10 @@
 import logging
-import math
 import sys
 import time
-from os import walk
-import threading
-import multiprocessing
 
-import pandas as pd
-from scipy import stats, sparse
+from scipy import sparse
 import numpy as np
 import networkx as nx
-
-import global_settings as global_settings
 
 
 def compute_semantic_measure(df_embed, embed_col_name, nx_graph, min_comp_size=1000):

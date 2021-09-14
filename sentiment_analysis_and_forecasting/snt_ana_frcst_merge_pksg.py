@@ -6,8 +6,7 @@ from os import path
 
 import pandas as pd
 
-import scenario_settings
-import global_settings
+from lib import global_settings
 from merge_pksg import merge_pksg_wrapper, merge_multiple_pksg
 from multitasking import multitasking
 

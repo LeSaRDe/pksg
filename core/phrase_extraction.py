@@ -1,8 +1,6 @@
 import logging
 import traceback
 import time
-import functools
-import operator
 from os import path
 
 import pandas as pd

@@ -8,9 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-import scenario_settings
-import global_settings
-
+from lib import global_settings
 
 """
 PKSG PIPELINE
@@ -156,7 +154,8 @@ def pksg_for_time_series(t_int_ds_name, pksg_ds_name):
             logging.error('[pksg_for_time_series] No text between %s and %s!' % (t_int_start, t_int_end))
             continue
         else:
-            t_int_hash_txts = df_txt_id_to_hash_txt.loc[df_txt_id_to_hash_txt.index.intersection(t_int_txt_ids)][global_settings.g_hash_txt_col].to_list()
+            t_int_hash_txts = df_txt_id_to_hash_txt.loc[df_txt_id_to_hash_txt.index.intersection(t_int_txt_ids)][
+                global_settings.g_hash_txt_col].to_list()
             t_int_hash_txts = set(t_int_hash_txts).intersection(s_pksg_hash_txts)
             if len(t_int_hash_txts) <= 0:
                 logging.error('[pksg_for_time_series] No PKSG rec between %s and %s!' % (t_int_start, t_int_end))

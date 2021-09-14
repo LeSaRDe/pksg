@@ -5,7 +5,6 @@ import sys
 from os import walk
 from copy import deepcopy
 
-import scipy as sp
 from scipy import sparse
 import numpy as np
 import torch as th

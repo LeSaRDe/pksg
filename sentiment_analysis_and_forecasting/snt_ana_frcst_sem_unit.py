@@ -5,7 +5,7 @@ import sys
 import pandas as pd
 
 import scenario_settings
-import global_settings
+from lib import global_settings
 from semantic_units_extraction import sem_unit_ext_wrapper
 
 

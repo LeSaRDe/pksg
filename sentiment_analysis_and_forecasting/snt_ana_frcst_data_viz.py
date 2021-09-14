@@ -4,14 +4,11 @@ import sys
 from os import path
 
 import networkx as nx
-from networkx.drawing.nx_agraph import graphviz_layout
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-import scenario_settings
-import global_settings
-
+from lib import global_settings
 
 """
 PKSG PIPELINE

@@ -3,8 +3,7 @@ import sys
 import math
 import pandas as pd
 
-import scenario_settings
-import global_settings
+from lib import global_settings
 from txt_hash import txt_hash_wrapper
 
 

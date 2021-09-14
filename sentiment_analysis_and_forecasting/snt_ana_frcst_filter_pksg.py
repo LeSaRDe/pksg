@@ -7,8 +7,7 @@ from os import path
 import networkx as nx
 import pandas as pd
 
-import scenario_settings
-import global_settings
+from lib import global_settings
 from filter_pksg import filter_pksg_node_wrapper, filter_pksg_edge_wrapper, PKSGNodeFilterBase, PKSGEdgeFilterBase
 from semantic_units_extractor import SemUnitsExtractor
 

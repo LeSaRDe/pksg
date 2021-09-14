@@ -1,15 +1,11 @@
 import logging
-import re
-from os import walk
 import time
-import json
-import math
 import sys
 import pandas as pd
 import csv
 
 import scenario_settings
-import global_settings
+from lib import global_settings
 
 """
 PKSG PIPELINE
