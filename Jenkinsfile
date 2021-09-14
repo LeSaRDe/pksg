@@ -3,6 +3,7 @@ pipeline {
     agent { label 'pksg' }
 
     environment {
+        PYTHONPATH = "${WORKSPACE}"
         OUTPUT = "${WORKSPACE}/output"
         NUM_TASK = 10
         DS_NAME = "sample"
@@ -17,8 +18,7 @@ pipeline {
             echo "WORKSPACE ${WORKSPACE}"
             echo "OUTPUT ${OUTPUT}"
             sh 'cd $WORKSPACE'
-        	sh 'chmod +x ./run_scripts/pksg_pipeline_envsetup.sh && . run_scripts/pksg_pipeline_envsetup.sh'
-        	echo "${PYTHONPATH}"
+        	sh 'chmod +x ./run_scripts/pksg_pipeline_envsetup.sh && ./run_scripts/pksg_pipeline_envsetup.sh'
           }
 
         }
