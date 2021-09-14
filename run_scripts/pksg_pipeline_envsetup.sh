@@ -14,3 +14,5 @@ then
 else
     echo "Output dir exists"
 fi
+
+export PYTHONPATH="${PYTHONPATH}:$WORKSPACE"
