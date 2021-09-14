@@ -18,8 +18,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import pandas as pd
 
-import global_settings
-import sd_2_usd
+from util import global_settings
+from core import sd_2_usd
 
 
 def prelim_txt_clean(raw_text, extra_clean_func=None, extra_clean_func_params=None):

@@ -7,14 +7,15 @@ import xml.etree.ElementTree as ET
 import numpy as np
 from gensim.parsing import preprocessing
 
-import global_settings
+import scenario_settings
+from util import global_settings
 
-from txt_cleansing import txt_clean_single_task
-from semantic_units_extractor import SemUnitsExtractor
-from phrase_extraction import phrase_ext_single_task, map_between_txt_and_phrase
-from sentiment_graphs import build_sgraph_from_json_single_task
-from phrase_sentiment import phrase_sent_single_task
-from pksg import pksg_single_task
+from core.txt_cleansing import txt_clean_single_task
+from core.semantic_units_extractor import SemUnitsExtractor
+from core.phrase_extraction import phrase_ext_single_task, map_between_txt_and_phrase
+from core.sentiment_graphs import build_sgraph_from_json_single_task
+from core.phrase_sentiment import phrase_sent_single_task
+from core.pksg import pksg_single_task
 
 
 def semeval2014task2_raw_txt_info(ds_idx, ds_name):

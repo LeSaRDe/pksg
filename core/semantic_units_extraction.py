@@ -3,9 +3,9 @@ import time
 import pandas as pd
 from os import path
 
-import global_settings
-from multitasking import multitasking
-from semantic_units_extractor import SemUnitsExtractor
+from util import global_settings
+from util.multitasking import multitasking
+from core.semantic_units_extractor import SemUnitsExtractor
 
 
 """

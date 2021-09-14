@@ -4,8 +4,8 @@ import time
 import numpy as np
 import pandas as pd
 
-import global_settings
-from multitasking import multitasking, merge_int_rets
+from util import global_settings
+from util.multitasking import multitasking, merge_int_rets
 
 """
 PKSG PIPELINE

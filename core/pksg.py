@@ -4,9 +4,9 @@ import time
 import networkx as nx
 import pandas as pd
 
-import global_settings
-from phrase_sentiment import compute_sentiment_for_one_phrase_in_one_txt, sentiment_calibration
-from multitasking import multitasking
+from util import global_settings
+from core.phrase_sentiment import compute_sentiment_for_one_phrase_in_one_txt, sentiment_calibration
+from util.multitasking import multitasking
 
 """
 PKSG PIPELINE

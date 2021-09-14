@@ -3,8 +3,8 @@ import sys
 import math
 import pandas as pd
 
-from lib import global_settings
-from txt_hash import txt_hash_wrapper
+from util import global_settings
+from core.txt_hash import txt_hash_wrapper
 
 
 def gen_txt_hash_tasks(ds_name, num_task, job_id):

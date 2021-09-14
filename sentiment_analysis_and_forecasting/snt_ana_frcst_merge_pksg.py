@@ -6,9 +6,9 @@ from os import path
 
 import pandas as pd
 
-from lib import global_settings
-from merge_pksg import merge_pksg_wrapper, merge_multiple_pksg
-from multitasking import multitasking
+from util import global_settings
+from core.merge_pksg import merge_pksg_wrapper, merge_multiple_pksg
+from util.multitasking import multitasking
 
 
 def gen_merge_pksg_tasks(ds_name, num_task, job_id, pksg_file_fmt=global_settings.g_pksg_file_fmt):

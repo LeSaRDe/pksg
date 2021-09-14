@@ -1,7 +1,7 @@
 import sys
-from lib.global_settings import g_src_folder, g_conf_folder
+from util.global_settings import g_src_folder, g_conf_folder
 g_pksg_module_folder = g_src_folder
-sys.path.insert(1, g_pksg_module_folder)
+# sys.path.insert(1, g_pksg_module_folder)
 
 
 # g_raw_ds_names = {'ca': 'CA_Mask_Twt_Text_Meta.csv',

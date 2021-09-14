@@ -5,8 +5,8 @@ import sys
 import pandas as pd
 
 import scenario_settings
-from lib import global_settings
-from semantic_units_extraction import sem_unit_ext_wrapper
+from util import global_settings
+from core.semantic_units_extraction import sem_unit_ext_wrapper
 
 
 def gen_sem_unit_extraction_tasks(ds_name, num_tasks, job_id):

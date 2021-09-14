@@ -13,7 +13,7 @@ import networkx as nx
 from sklearn import preprocessing
 import pandas as pd
 
-import global_settings as global_settings
+import util.global_settings as global_settings
 
 
 def retrieve_orig_embed_for_tkg(tkg, df_token_embed, min_size, tune_ds_name=None):

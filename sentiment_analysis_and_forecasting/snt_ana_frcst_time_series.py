@@ -8,7 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-from lib import global_settings
+from util import global_settings
 
 """
 PKSG PIPELINE

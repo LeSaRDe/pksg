@@ -5,8 +5,8 @@ import time
 
 import pandas as pd
 
-from lib import global_settings
-from pksg import pksg_wrapper
+from util import global_settings
+from core.pksg import pksg_wrapper
 
 
 def gen_pksg_tasks(txt_ph_ds_name, ph_sent_ds_name, sgraph_ds_name, num_tasks, job_id):

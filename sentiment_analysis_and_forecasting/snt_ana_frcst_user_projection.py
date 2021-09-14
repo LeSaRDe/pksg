@@ -5,7 +5,7 @@ import time
 
 import pandas as pd
 
-from lib import global_settings
+from util import global_settings
 
 
 def gen_rtug_ts_tasks(num_task, job_id, t_int_ds_name):

@@ -3,8 +3,8 @@ import sys
 import math
 import pandas as pd
 
-from lib import global_settings
-from txt_cleansing import txt_clean_wrapper
+from util import global_settings
+from core.txt_cleansing import txt_clean_wrapper
 
 
 def gen_txt_clean_tasks(ds_name, num_task, job_id, raw_txt_col):

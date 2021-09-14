@@ -5,8 +5,8 @@ import sys
 
 import pandas as pd
 
-from lib import global_settings
-from phrase_extraction import phrase_ext_wrapper
+from util import global_settings
+from core.phrase_extraction import phrase_ext_wrapper
 
 
 def gen_phrase_ext_tasks(ds_name, num_tasks, job_id):

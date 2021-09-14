@@ -7,8 +7,8 @@ from os import walk, path
 import networkx as nx
 import pandas as pd
 
-import global_settings
-from multitasking import multitasking
+from util import global_settings
+from util.multitasking import multitasking
 
 
 """

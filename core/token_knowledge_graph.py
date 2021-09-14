@@ -13,7 +13,7 @@ import networkx as nx
 # from networkx.drawing.nx_agraph import graphviz_layout
 import pandas as pd
 
-import global_settings as global_settings
+from util import global_settings
 
 
 def build_cckg_for_one_tw(tw_id, df_tw_to_phid, df_phid_to_phstr):

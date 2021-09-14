@@ -2,7 +2,7 @@ import logging
 import sys
 import re
 
-from txt_cleansing import txt_clean_wrapper
+from core.txt_cleansing import txt_clean_wrapper
 from snt_ana_frcst_txt_clean import gen_txt_clean_tasks
 
 

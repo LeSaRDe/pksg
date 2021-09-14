@@ -3,7 +3,7 @@ import sys
 import re
 
 import scenario_settings
-from sentiment_graphs import build_sgraph_from_json_wrapper
+from core.sentiment_graphs import build_sgraph_from_json_wrapper
 
 
 if __name__ == '__main__':

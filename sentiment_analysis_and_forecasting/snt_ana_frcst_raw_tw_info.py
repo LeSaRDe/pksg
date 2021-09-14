@@ -7,8 +7,8 @@ import math
 import sys
 import pandas as pd
 
-from lib import global_settings
-from multitasking import multitasking
+from util import global_settings
+from util.multitasking import multitasking
 
 
 """

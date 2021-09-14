@@ -5,8 +5,8 @@ import math
 
 import pandas as pd
 
-from lib import global_settings
-from phrase_sentiment import phrase_sent_wrapper
+from util import global_settings
+from core.phrase_sentiment import phrase_sent_wrapper
 
 
 def gen_phrase_sent_tasks(sgraph_ds_name, txt_ph_ds_name, num_tasks, job_id):
