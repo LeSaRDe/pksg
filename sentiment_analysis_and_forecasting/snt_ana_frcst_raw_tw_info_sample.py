@@ -1,6 +1,6 @@
 import logging
 import re
-from os import walk
+import os
 import time
 import json
 import math
@@ -300,11 +300,11 @@ def gen_extract_raw_tw_info_tasks(num_proc, job_id):
 
     done_cnt = 0
     l_tw_str = []
-    for (dirpath, dirname, filenames) in walk(global_settings.g_raw_data_folder):
+    for (dirpath, dirname, filenames) in os.walk(global_settings.g_raw_data_folder):
         for filename in filenames:
             if re.match(r'.*\.txt', filename) is None:
                 continue
-            with open(dirpath + '/' + filename, 'r') as in_fd:
+            with open(os.path.join(dirpath, filename), 'r') as in_fd:
                 for ln in in_fd:
                     ln = ln.strip()
                     if ln is None or len(ln) <= 1:

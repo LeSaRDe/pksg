@@ -127,10 +127,10 @@ def merge_int_rets(int_folder, int_fmt, index_col, rm_int):
             for filename in filenames:
                 if re.match(int_fmt, filename) is None:
                     continue
-                df_int = pd.read_pickle(dirpath + filename)
+                df_int = pd.read_pickle(os.path.join(dirpath, filename))
                 l_int.append(df_int)
                 if rm_int:
-                    os.remove(dirpath + filename)
+                    os.remove(os.path.join(dirpath, filename))
         if len(l_int) <= 0:
             logging.error('[merge_int_rets] No intermediate result to merge.')
             return None
