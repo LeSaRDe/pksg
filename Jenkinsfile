@@ -49,5 +49,18 @@ pipeline {
                 echo "TXT_CLEAN is done!"
             }
         }
+
+        stage("TXT HASH") {
+            environment {
+                TXT_HASH_JOB_ID = 0
+                TXT_HASH_NUM_TASK = "${NUM_TASK}"
+            }
+            steps {
+                echo "TXT_HASH Starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_txt_hash.py gen_tasks $TXT_HASH_NUM_TASK $TXT_HASH_JOB_ID $DS_NAME'
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_txt_hash.py txt_hash $TXT_HASH_NUM_TASK $TXT_HASH_JOB_ID $DS_NAME'
+                echo "TXT_HASH is done!"
+            }
+        }
     }
 }
