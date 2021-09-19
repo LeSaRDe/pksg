@@ -35,5 +35,19 @@ pipeline {
                 echo "RAW_TXT is done!"
             }
         }
+
+       stage("TXT CLEAN") {
+            environment {
+                TXT_CLEAN_JOB_ID = 0
+                TXT_CLEAN_NUM_TASK = "${NUM_TASK}"
+                RAW_TXT_COL = "tw_raw_txt"
+            }
+            steps {
+                echo "TXT_CLEAN Starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_txt_clean_carley.py gen_tasks $TXT_CLEAN_NUM_TASK $TXT_CLEAN_JOB_ID $DS_NAME $RAW_TXT_COL'
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_txt_clean_carley.py raw_tw_info $TXT_CLEAN_NUM_TASK $TXT_CLEAN_JOB_ID $DS_NAME'
+                echo "TXT_CLEAN is done!"
+            }
+        }
     }
 }
