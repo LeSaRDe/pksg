@@ -45,7 +45,7 @@ pipeline {
             steps {
                 echo "TXT_CLEAN Starts."
                 sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_txt_clean_carley.py gen_tasks $TXT_CLEAN_NUM_TASK $TXT_CLEAN_JOB_ID $DS_NAME $RAW_TXT_COL'
-                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_txt_clean_carley.py raw_tw_info $TXT_CLEAN_NUM_TASK $TXT_CLEAN_JOB_ID $DS_NAME'
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_txt_clean_carley.py txt_clean $TXT_CLEAN_NUM_TASK $TXT_CLEAN_JOB_ID $DS_NAME'
                 echo "TXT_CLEAN is done!"
             }
         }
@@ -60,6 +60,20 @@ pipeline {
                 sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_txt_hash.py gen_tasks $TXT_HASH_NUM_TASK $TXT_HASH_JOB_ID $DS_NAME'
                 sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_txt_hash.py txt_hash $TXT_HASH_NUM_TASK $TXT_HASH_JOB_ID $DS_NAME'
                 echo "TXT_HASH is done!"
+            }
+        }
+
+        stage("SEMANTIC UNIT") {
+            environment {
+                SEM_UNIT_JOB_ID = 0
+                SEM_UNIT_NUM_TASK = "${NUM_TASK}"
+                SEM_UNIT_CUST_PH_DS_NAME = "covid"
+            }
+            steps {
+                echo "SEM_UNIT Starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_sem_unit.py gen_tasks $SEM_UNIT_NUM_TASK $SEM_UNIT_JOB_ID $DS_NAME'
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_sem_unit.py sem_unit $SEM_UNIT_NUM_TASK $SEM_UNIT_JOB_ID $DS_NAME $SEM_UNIT_CUST_PH_DS_NAME'
+                echo "SEM_UNIT is done!"
             }
         }
     }
