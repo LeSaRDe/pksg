@@ -24,10 +24,6 @@ RUN sed -i /etc/ssh/sshd_config \
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-RUN python3 -m venv venv
-RUN . venv/bin/activate
-RUN pip install -e .
-RUN deactivate
 
 ARG user=jenkins
 RUN adduser ${user}
@@ -40,7 +36,6 @@ WORKDIR "${JENKINS_AGENT_HOME}"
 
 ENV JAVA_HOME=/usr/bin/java
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
-RUN echo "PATH=${PATH}" >> /etc/environment
 
 COPY setup-sshd /usr/local/bin/setup-sshd
 EXPOSE 22
