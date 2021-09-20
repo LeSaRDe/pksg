@@ -76,5 +76,17 @@ pipeline {
                 echo "SEM_UNIT is done!"
             }
         }
+
+        stage("TXT SENT") {
+            environment {
+                TXT_SENT_JOB_CNT = 1
+                TXT_SENT_NUM_TASK = "${NUM_TASK}"
+            }
+            steps {
+                echo "TXT_SENT gen_tasks starts."
+                sh 'python3 sentiment_analysis_and_forecasting/stanford_sentiments_preparation.py gen_tasks $TXT_SENT_NUM_TASK $TXT_SENT_JOB_CNT $DS_NAME'
+                echo "TXT_SENT gen_tasks is done!"
+            }
+        }
     }
 }
