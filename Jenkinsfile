@@ -81,11 +81,22 @@ pipeline {
             environment {
                 TXT_SENT_JOB_CNT = 1
                 TXT_SENT_NUM_TASK = "${NUM_TASK}"
+                SLURM_ARRAY_TASK_ID = 0
+                JAVA_XMX = "-Xmx5G"
+                CORENLP_PATH = "${CORENLP_ROOT}/${CORENLP_VER}/"
             }
             steps {
                 echo "TXT_SENT gen_tasks starts."
                 sh 'python3 sentiment_analysis_and_forecasting/stanford_sentiments_preparation.py gen_tasks $TXT_SENT_NUM_TASK $TXT_SENT_JOB_CNT $DS_NAME'
                 echo "TXT_SENT gen_tasks is done!"
+
+                echo "TXT SENT corenlp @ Job ${SLURM_ARRAY_TASK_ID} starts."
+                sh 'cd ./core_nlp_sentiments'
+                sh '. envsetup.sh'
+                sh 'make'
+                sh 'java $JAVA_XMX core_nlp_sentiments.PhraseSentimentParallel $TXT_SENT_NUM_TASK $SLURM_ARRAY_TASK_ID'
+                sh 'cd $WORKSPACE'
+                echo "TXT SENT corenlp @ Job ${SLURM_ARRAY_TASK_ID} is done."
             }
         }
     }
