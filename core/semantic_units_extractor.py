@@ -4,6 +4,7 @@ OBJECTIVES:
 '''
 import logging
 import json
+import os.path
 import re
 from os import path, walk
 from collections import deque
@@ -100,7 +101,7 @@ class SemUnitsExtractor:
         try:
             self.m_conf_spacy_model_name = d_conf['spacy_model']
             self.m_use_custom_stopwords = d_conf['use_custom_stopwords']
-            self.m_conf_stopwords_path = d_conf['stopwords_path']
+            self.m_conf_stopwords_path = os.path.join(global_settings.g_core_folder, d_conf['stopwords_file'])
             self.m_conf_spacy_coref_greedyness = float(d_conf['spacy_coref_greedyness'])
             self.m_s_ner_tags = set(d_conf['ner'])
             self.m_b_en_dep_filter = bool(d_conf['en_dep_filter'])

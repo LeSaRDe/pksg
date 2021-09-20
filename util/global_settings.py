@@ -4,6 +4,7 @@ INPUTS
 """
 g_src_folder = os.getenv('WORKSPACE')
 g_output_folder = os.getenv('OUTPUT')
+g_core_folder = os.path.join(g_src_folder, 'core')
 
 g_local_or_remote = os.getenv('LOCAL_OR_REMOTE')
 
@@ -300,7 +301,7 @@ g_edge_id_col = 'edge_id'
 """
 CONFIGURATIONS
 """
-g_sem_units_extractor_config_file = os.path.join(g_src_folder, 'sem_units_ext.conf')
+g_sem_units_extractor_config_file = os.path.join(g_core_folder, 'sem_units_ext.conf')
 # g_lexvec_model_folder = '/home/mf3jh/workspace/lib/lexvec/python/lexvec/'
 # g_lexvec_vect_file_path = '/home/mf3jh/workspace/lib/lexvec/lexvec.commoncrawl.ngramsubwords.300d.W.pos.bin'
 g_phrase_sim_threshold = 0.8
