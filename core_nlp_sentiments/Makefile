@@ -3,7 +3,7 @@ JFLAGS = -g -d bin -sourcepath src
 JC = javac
 RM = rm
 
-SRCPATH = src/core_nlp_sentiments
+SRCPATH = $(WORKSPACE)/core_nlp_sentiments/src/core_nlp_sentiments
 
 .SUFFIXES: .java .class
 
