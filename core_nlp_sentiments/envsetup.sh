@@ -5,4 +5,4 @@
 
 export CLASSPATH="$CLASSPATH:.:./bin/:./config/"
 for file in `find $CORENLP_PATH  -name "*.jar"`; do export CLASSPATH="$CLASSPATH:`realpath $file`"; done
-export _JAVA_OPTIONS="-Djava.net.preferIPv4Stack=true"
+echo "$CLASSPATH"
