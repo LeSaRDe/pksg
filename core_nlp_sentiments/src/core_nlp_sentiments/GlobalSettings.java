@@ -1,8 +1,7 @@
 package core_nlp_sentiments;
 
 import java.util.logging.Level;
-import Paths.*;
-import System.*;
+import java.nio.file.Paths;
 
 public class GlobalSettings {
 //    static final String WORK_DIR = "/scratch/mf3jh/data/covid/sent_graph/";
