@@ -98,7 +98,6 @@ pipeline {
 
                 echo "TXT SENT corenlp @ Job ${SLURM_ARRAY_TASK_ID} starts."
                 dir('core_nlp_sentiments') {
-                    echo "${CLASSPATH}"
                     sh 'make'
                     sh 'java $JAVA_XMX -cp $CLASSPATH core_nlp_sentiments.PhraseSentimentParallel $TXT_SENT_NUM_TASK $SLURM_ARRAY_TASK_ID'
                 }
