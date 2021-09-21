@@ -84,7 +84,13 @@ pipeline {
                 SLURM_ARRAY_TASK_ID = 0
                 JAVA_XMX = "-Xmx5G"
                 CORENLP_PATH = "${CORENLP_ROOT}/${CORENLP_VER}/"
+                _JAVA_OPTIONS = "-Djava.net.preferIPv4Stack=true"
+                CLASSPATH = sh(returnStdout: true, script: '''#!/bin/bash
+                        CLASSPATH="$CLASSPATH:.:./bin/:./config/"
+                        for file in `find $CORENLP_ROOT/$CORENLP_VER/  -name "*.jar"`; do CLASSPATH="$CLASSPATH:`realpath $file`"; done
+                        echo "$CLASSPATH"''')
             }
+
             steps {
                 echo "TXT_SENT gen_tasks starts."
                 sh 'python3 sentiment_analysis_and_forecasting/stanford_sentiments_preparation.py gen_tasks $TXT_SENT_NUM_TASK $TXT_SENT_JOB_CNT $DS_NAME'
@@ -92,7 +98,7 @@ pipeline {
 
                 echo "TXT SENT corenlp @ Job ${SLURM_ARRAY_TASK_ID} starts."
                 dir('core_nlp_sentiments') {
-                    sh '. ./envsetup.sh'
+                    echo "${CLASSPATH}"
                     sh 'make'
                     sh 'java $JAVA_XMX core_nlp_sentiments.PhraseSentimentParallel $TXT_SENT_NUM_TASK $SLURM_ARRAY_TASK_ID'
                 }
