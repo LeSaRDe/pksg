@@ -1,3 +1,4 @@
+import os.path
 import sys
 from util.global_settings import g_src_folder, g_conf_folder
 g_pksg_module_folder = g_src_folder
@@ -32,7 +33,7 @@ g_raw_ds_names = ['sample.txt']
 
 
 # Used by SEM_UNIT
-g_cust_ph_file_fmt = g_conf_folder + 'cust_ph_{0}.txt'
+g_cust_ph_file_fmt = os.path.join(g_conf_folder, 'cust_ph_{0}.txt')
 
 # Used by SENT_TS
-g_query_file_fmt = g_conf_folder + 'query_{0}.txt'
+g_query_file_fmt = os.path.join(g_conf_folder, 'query_{0}.txt')
