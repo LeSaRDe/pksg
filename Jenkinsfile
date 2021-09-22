@@ -8,6 +8,7 @@ pipeline {
         NUM_TASK = 10
         DS_NAME = "sample"
         LOCAL_OR_REMOTE = "local"
+        SLURM_ARRAY_TASK_ID = 0
     }
 
     stages {
@@ -81,7 +82,6 @@ pipeline {
             environment {
                 TXT_SENT_JOB_CNT = 1
                 TXT_SENT_NUM_TASK = "${NUM_TASK}"
-                SLURM_ARRAY_TASK_ID = 0
                 JAVA_XMX = "-Xmx5G"
                 CORENLP_PATH = "${CORENLP_ROOT}/${CORENLP_VER}/"
                 _JAVA_OPTIONS = "-Djava.net.preferIPv4Stack=true"
