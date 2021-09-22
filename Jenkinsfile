@@ -104,5 +104,18 @@ pipeline {
                 echo "TXT SENT corenlp @ Job ${SLURM_ARRAY_TASK_ID} is done."
             }
         }
+
+        stage("TXT PHRASE") {
+            environment {
+                TXT_PH_JOB_ID = 0
+                TXT_PH_NUM_TASK = "${NUM_TASK}"
+            }
+            steps {
+                echo "TXT_PH Starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_phrase.py gen_tasks $TXT_PH_NUM_TASK $TXT_PH_JOB_ID $DS_NAME'
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_phrase.py phrase_ext $TXT_PH_NUM_TASK $TXT_PH_JOB_ID $DS_NAME'
+                echo "TXT_PH is done!"
+            }
+        }
     }
 }
