@@ -140,5 +140,17 @@ pipeline {
                 echo "PH_SENT is done!"
             }
         }
+
+        stage("PKSG") {
+            environment {
+                PKSG_NUM_TASK = "${NUM_TASK}"
+            }
+            steps {
+                echo "PKSG Starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_pksg.py gen_tasks $PKSG_NUM_TASK $SLURM_ARRAY_TASK_ID $DS_NAME'
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_pksg.py pksg $PKSG_NUM_TASK $SLURM_ARRAY_TASK_ID $DS_NAME'
+                echo "PKSG is done!"
+            }
+        }
     }
 }
