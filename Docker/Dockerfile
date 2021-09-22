@@ -7,9 +7,8 @@ RUN apt-get update \
 RUN apt-get update \
 	&& apt-get install -y python3 \
 	&& apt-get install -y python3-pip \
-	&& apt-get install -y python3-venv \
-	&& apt-get install -y iproute2 \
-	&& apt-get install -y openjdk-11-jdk \ 
+    && apt-get install -y iproute2 \
+	&& apt-get install -y openjdk-11-jdk \
 	&& apt-get install -y git \
 	&& apt-get install --no-install-recommends -y openssh-server \
 	&& rm -rf /var/lib/apt/lists/*
@@ -24,6 +23,7 @@ RUN sed -i /etc/ssh/sshd_config \
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
+RUN python3 -m spacy download en_core_web_lg
 
 ARG user=jenkins
 RUN adduser ${user}
@@ -33,6 +33,11 @@ ENV JENKINS_AGENT_HOME ${JENKINS_AGENT_HOME}
 
 VOLUME "${JENKINS_AGENT_HOME}" "/tmp" "/run" "/var/run"
 WORKDIR "${JENKINS_AGENT_HOME}"
+
+ENV CORENLP_ROOT ${JENKINS_AGENT_HOME}/corenlp
+RUN mkdir ${CORENLP_ROOT}
+COPY . corenlp ${CORENLP_ROOT}/
+ENV CORENLP_VER "stanford-corenlp-4.2.2"
 
 ENV JAVA_HOME=/usr/bin/java
 ENV PATH "${JAVA_HOME}/bin:${PATH}"

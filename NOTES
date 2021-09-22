@@ -12,3 +12,5 @@ echo %WORKSPACE%
 
 set OUTPUT=D:\workspace\PKSG\output
 echo %OUTPUT%
+
+sem_units_ext.conf  "stopwords_path" -> "stopwords_file", only save file name, not file path
