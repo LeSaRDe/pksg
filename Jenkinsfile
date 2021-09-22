@@ -124,8 +124,20 @@ pipeline {
             }
             steps {
                 echo "SGRAPH Starts."
-                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_sgraph.py build_sgraph_from_json $SGRAPH_NUM_TASK $SLURM_ARRAY_TASK_ID $DS_NAME
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_sgraph.py build_sgraph_from_json $SGRAPH_NUM_TASK $SLURM_ARRAY_TASK_ID $DS_NAME'
                 echo "SGRAPH is done!"
+            }
+        }
+
+        stage("PHRASE SENT") {
+            environment {
+                PH_SENT_NUM_TASK = "${NUM_TASK}"
+            }
+            steps {
+                echo "PH_SENT Starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_phrase_sent.py gen_tasks $PH_SENT_NUM_TASK $SLURM_ARRAY_TASK_ID $DS_NAME'
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_phrase_sent.py ph_sent $PH_SENT_NUM_TASK $SLURM_ARRAY_TASK_ID $DS_NAME'
+                echo "PH_SENT is done!"
             }
         }
     }
