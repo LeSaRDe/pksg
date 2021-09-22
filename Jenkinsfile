@@ -117,5 +117,16 @@ pipeline {
                 echo "TXT_PH is done!"
             }
         }
+
+        stage("SGRAPH") {
+            environment {
+                SGRAPH_NUM_TASK = "${NUM_TASK}"
+            }
+            steps {
+                echo "SGRAPH Starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_sgraph.py build_sgraph_from_json $SGRAPH_NUM_TASK $SLURM_ARRAY_TASK_ID $DS_NAME
+                echo "SGRAPH is done!"
+            }
+        }
     }
 }
