@@ -152,5 +152,51 @@ pipeline {
                 echo "PKSG is done!"
             }
         }
+
+        stage("T_INT") {
+            environment {
+                T_INT_INT_LEN = "####5"
+                T_INT_INT_STRIDE = "####1"
+            }
+            steps {
+                echo "T_INT gen_int Starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_time_series.py gen_time_series $DS_NAME $T_INT_INT_LEN $T_INT_INT_STRIDE'
+                echo "T_INT gen_int  is done!"
+
+                echo "T_INT pksg_ts Starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_time_series.py pksg_ts $SLURM_ARRAY_TASK_ID $DS_NAME'
+                echo "T_INT pksg_ts  is done!"
+            }
+        }
+
+        stage("SENT TS") {
+            environment {
+                SENT_TS_PKSG_JOB_CNT = 1
+                SENT_TS_JOB_CNT = 1
+                SENT_TS_NUM_TASK = "${NUM_TASK}"
+                SENT_TS_QUERY_DS_NAME = "covid_19_vaccination"
+                SENT_TS_QUOTIENT_NAME = "covid_19_vaccination"
+                SENT_TS_PH_DS_NAME = "${DS_NAME}"
+                SENT_TS_SHOW_IMG = 0
+                SENT_TS_SAVE_IMG = 1
+            }
+            steps {
+                echo "SENT_TS gen_tasks starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_sentiment_time_series.py gen_tasks $DS_NAME $SENT_TS_PKSG_JOB_CNT $SENT_TS_JOB_CNT $SENT_TS_NUM_TASK'
+                echo "SENT_TS gen_tasks is done!"
+
+                echo "SENT_TS sent_ts starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_sentiment_time_series.py sent_ts $SENT_TS_NUM_TASK $SLURM_ARRAY_TASK_ID $DS_NAME $SENT_TS_QUERY_DS_NAME'
+                echo "SENT_TS sent_ts is done!"
+
+                echo "SENT_TS merge_sent_ts starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_sentiment_time_series.py merge_sent_ts $DS_NAME $SENT_TS_QUERY_DS_NAME $SENT_TS_JOB_CNT $SENT_TS_QUOTIENT_NAME $SENT_TS_PH_DS_NAME'
+                echo "SENT_TS merge_sent_ts is done!"
+
+                echo "SENT_TS draw_sent_ts starts."
+                sh 'python3 sentiment_analysis_and_forecasting/snt_ana_frcst_sentiment_time_series.py draw_sent_ts $DS_NAME $SENT_TS_QUERY_DS_NAME $SENT_TS_SHOW_IMG $SENT_TS_SAVE_IMG $SENT_TS_QUOTIENT_NAME'
+                echo "SENT_TS draw_sent_ts is done!"
+            }
+        }
     }
 }
